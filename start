@@ -1,4 +1,4 @@
- Как я создавал это проект
+ Как я создавал это проект 06.11.23
 
 # Сoздаём виртуальное окружение
 python -m venv venv
@@ -10,6 +10,7 @@ pip install -r requirements.txt
 cd .\project
 
 # Cоздём новые миграции
+
 python manage.py makemigrations
 # Применяем миграции
 python manage.py migrate
