@@ -1,0 +1,21 @@
+# Как я создавал это проект
+
+# Сoздаём виртуальное окружение
+python -m venv venv
+
+# Активируем виртуальное окружение
+.\venv\Scripts\activate
+
+# Устанавливаем библиотеки из requirements.txt (Django)
+pip install -r requirements.txt
+
+django-admin startproject project
+
+# Переходим в папку project
+cd .\project
+
+python manage.py startapp simpleapp
+
+python manage.py createsupeeruser
+
+

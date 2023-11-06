@@ -1,0 +1,290 @@
+ Как я создавал это проект
+
+# Сoздаём виртуальное окружение
+python -m venv venv
+# Активируем виртуальное окружение
+.\venv\Scripts\activate
+# Устанавливаем библиотеки из requirements.txt (Django)
+pip install -r requirements.txt
+# Переходим в папку project
+cd .\project
+
+# Cоздём новые миграции
+python manage.py makemigrations
+# Применяем миграции
+python manage.py migrate
+# Запускаем окно командной строки
+python manage.py shell
+
+from newapp.models import *
+
+#[ 1 ]Создадим двух пользователей (с помощью метода User.objects.create_user('username')) + Проверка.
+#
+# Создаём 1 пользователя
+User_1 = User.objects.create_user(username='User_1')
+#
+# Создаём 2 пользователя
+User_2 = User.objects.create_user(username='User_2')
+#
+# Проверка, что все Пользователи добавлины (2)
+#
+all_users = User.objects.all()
+all_users
+#
+#[ 2 ]Создадим два объекта модели Author
+#
+# Создаём 1 объект модели Author
+#
+Author_1 = Author.objects.create(authorUser=User_1)
+#
+# Создаём 2 объект модели Author
+#
+Author_2 = Author.objects.create(authorUser=User_2)
+#
+# Проверка, что все Авторы добавлины (2)
+all_author = Author.objects.all()
+all_author
+#
+#[ 3 ]Добавим 4 категории в модель Category. + Проверка
+#
+# Добавим 1 Категорию
+Category_1 = Category.objects.create(name='Category_1')
+#
+# Добавим 2 Категорию
+Category_2 = Category.objects.create(name='Category_2')
+#
+# Добавим 3 Категорию
+Category_3 = Category.objects.create(name='Category_3')
+#
+# Добавим 4 Категорию
+Category_4 = Category.objects.create(name='Category_4')
+#
+# Проверка, что все Kатегории добавлины (4)
+#
+all_category = Category.objects.all()
+all_category
+#
+#[ 4 ]Добавим 4 Поста + Проверка
+#
+# Добавим 1 Пост( 1 Авторa, ARTICLE - Cтатья, title - заголовок, text - текст)
+Post_1 = Post.objects.create(author=Author_1, categoryType='AR', title='Post_1', text='(1)Cтатья 1 Авторa')
+#
+# Добавим 2 Пост( 1 Авторa, ARTICLE - Cтатья, title - заголовок, text - текст)
+Post_2 = Post.objects.create(author=Author_2, categoryType='AR', title='Post_2', text='(2)Cтатья 2 Авторa')
+#
+# Добавим 3 Пост( 2 Авторa, NEWS - Новость, title - заголовок, text - текст)
+Post_3 = Post.objects.create(author=Author_1, categoryType='NW', title='Post_3', text='(1)Новость 1 Авторa')
+#
+# Добавим 4 Пост( 2 Авторa, NEWS - Новость, title - заголовок, text - текст)
+Post_4 = Post.objects.create(author=Author_2, categoryType='NW', title='Post_4', text='(2)Новость 2 Авторa')
+#
+# Проверка, что все Посты добавлины (4)
+#
+all_post = Post.objects.all()
+all_post
+#
+#[ 5 ]Присвоим им категории/Добавим к Постам Категории.
+#
+# Добавим к 1 Посту Категорию(1) (Category_1)
+Post_1.postCategory.add(Category_1)
+#
+# Добавим к 2 Посту Категорию(1) (Category_1)
+Post_2.postCategory.add(Category_1)
+#
+# Добавим к 3 Посту Категорию(1) (Category_1)
+Post_3.postCategory.add(Category_1)
+#
+# Добавим к 4 Посту Категорию(1) (Category_1)
+Post_4.postCategory.add(Category_1)
+#
+# Добавим к 1 Посту Категорию(2) (Category_2)
+Post_1.postCategory.add(Category_2)
+#
+# Добавим к 2 Посту Категорию(2) (Category_2)
+Post_2.postCategory.add(Category_2)
+#
+# Добавим к 3 Посту Категорию(2) (Category_2)
+Post_3.postCategory.add(Category_2)
+#
+# Добавим к 4 Посту Категорию(2) (Category_2)
+Post_4.postCategory.add(Category_2)
+#
+# Добавим к 1 Посту Категорию(3) (Category_3)
+Post_1.postCategory.add(Category_3)
+#
+# Добавим к 2 Посту Категорию(3) (Category_3)
+Post_2.postCategory.add(Category_3)
+#
+# Добавим к 3 Посту Категорию(3) (Category_3)
+Post_3.postCategory.add(Category_3)
+#
+# Добавим к 4 Посту Категорию(3) (Category_3)
+Post_4.postCategory.add(Category_3)
+#
+# Добавим к 1 Посту Категорию(4) (Category_4)
+Post_1.postCategory.add(Category_4)
+#
+# Добавим к 2 Посту Категорию(4) (Category_4)
+Post_2.postCategory.add(Category_4)
+#
+# Добавим к 3 Посту Категорию(4) (Category_4)
+Post_3.postCategory.add(Category_4)
+#
+# Добавим к 4 Посту Категорию(4) (Category_4)
+Post_4.postCategory.add(Category_4)
+#
+#[ 6 ]Создать как минимум 4 комментария к разным объектам модели Post (в каждом объекте должен быть как минимум один комментарий)Создаём Комментари + Проверка
+#
+# Создаём 1 Комментарий (Comment_1) (Author_1) (ARTICLE)
+Comment_1 = Comment.objects.create(commentPost=Post_1, commentUser=Author_1.authorUser, text='Comment_1 | Post_1 | Author_1')
+#
+# Создаём 2 Комментарий (Comment_2) (Author_2) (ARTICLE)
+Comment_2 = Comment.objects.create(commentPost=Post_2, commentUser=Author_2.authorUser, text='Comment_2 | Post_2 | Author_2')
+#
+# Создаём 3 Комментарий (Comment_3) (Author_1) (NEWS)
+Comment_3 = Comment.objects.create(commentPost=Post_3, commentUser=Author_1.authorUser, text='Comment_3 | Post_3 | Author_1')
+#
+# Создаём 4 Комментарий (Comment_4) (Author_2) (NEWS)
+Comment_4 = Comment.objects.create(commentPost=Post_4, commentUser=Author_2.authorUser, text='Comment_4 | Post_4 | Author_2')
+#
+# Проверка, что все Комментарии добавлины (4)
+#
+all_comment = Comment.objects.all()
+all_comment
+#
+#[ 7 ]Применяя функции like() и dislike() к статьям/новостям и комментариям, скорректировать рейтинги этих объектов.
+# + 10 like к Комментарию(1) (Comment_1) (+10) (Author_1) (ARTICLE) + выводит Рейтинг
+#
+Comment_1.like() # 1 like
+Comment_1.like() # 2 like
+Comment_1.like() # 3 like
+Comment_1.like() # 4 like
+Comment_1.like() # 5 like
+Comment_1.like() # 6 like
+Comment_1.like() # 7 like
+Comment_1.like() # 8 like
+Comment_1.like() # 9 like
+Comment_1.like() # 10 like
+#
+# reting - выводит Рейтинг Коментария(1) (Comment_1) (Author_1) (ARTICLE)
+Comment_1.rating
+#
+# - 3 dislike к Комментарию(1) (Comment_1) (-3) (Author_1) (ARTICLE) + выводит Рейтинг
+#
+Comment_1.dislike() # 9 like
+Comment_1.dislike() # 8 like
+Comment_1.dislike() # 7 like
+#
+# reting - выводит Рейтинг Коментария(1) (Comment_1) (Author_1) (ARTICLE) + выводит Рейтинг
+Comment_1.rating
+#
+# + 6 like к Комментарию(2) (Comment_2) (+6) (Author_2) (ARTICLE) + выводит Рейтинг
+#
+Comment_2.like() # 1 like
+Comment_2.like() # 2 like
+Comment_2.like() # 3 like
+Comment_2.like() # 4 like
+Comment_2.like() # 5 like
+Comment_2.like() # 6 like
+#
+# reting - выводит Рейтинг Коментария(2) (Comment_2) (Author_2) (ARTICLE)
+Comment_2.rating
+#
+# - 3 dislike к Комментарию(2) (Comment_2) (-3) (Author_2) (ARTICLE) + выводит Рейтинг
+#
+Comment_2.dislike() # 5 like
+Comment_2.dislike() # 4 like
+Comment_2.dislike() # 3 like
+#
+# reting - выводит Рейтинг Коментария(2) (Comment_2) (Author_2) (ARTICLE)
+Comment_2.rating
+#
+# + 7 like к Комментарию(3) (Comment_3) (+7) (Author_1) (NEWS) + выводит Рейтинг
+#
+Comment_3.like() # 1 like
+Comment_3.like() # 2 like
+Comment_3.like() # 3 like
+Comment_3.like() # 4 like
+Comment_3.like() # 5 like
+Comment_3.like() # 6 like
+Comment_3.like() # 7 like
+#
+# reting - выводит Рейтинг Коментария(3) (Comment_3) (Author_1) (NEWS)
+Comment_3.rating
+#
+# - 3 dislike к Комментарию(3) (Comment_3) (-3) (NEWS) + выводит Рейтинг
+#
+Comment_3.dislike() # 6 like
+Comment_3.dislike() # 5 like
+Comment_3.dislike() # 4 like
+#
+# reting - выводит Рейтинг Коментария(3) (Comment_3) (Author_1) (NEWS)
+Comment_3.rating
+#
+# + 3 like к Комментарию(4) (Comment_4) (+3) (Author_2) (NEWS) + выводит Рейтинг
+#
+Comment_4.like() # 1 like
+Comment_4.like() # 2 like
+Comment_4.like() # 3 like
+#
+# reting - выводит Рейтинг Коментария(4) (Comment_4) (Author_2) (NEWS)
+Comment_4.rating
+#
+# - 1 dislike к Комментарию(4) (Comment_4) (-1) (Author_2) (NEWS) + выводит Рейтинг
+#
+Comment_4.dislike() # 2 like
+#
+# reting - выводит Рейтинг Коментария(4) (Comment_4) (Author_2) (NEWS)
+Comment_4.rating
+#
+#[ 8 ]Обновим рейтинги пользователей.
+#
+# Обновим рейтинг 1 Автора (Author_1)
+#
+Author_1.update_rating()
+#
+# Выведим рейтинг 1 Автора (Author_1)
+#
+Author_1.ratingAuthor
+#
+# Обновим рейтинг 2 Автора (Author_2)
+#
+Author_2.update_rating()
+#
+# Выведим рейтинг 2 Автора (Author_2)
+#
+Author_2.ratingAuthor
+#
+#[ 9 ]Выводим username и рейтинг лучшего пользователя
+#
+bestUser = Author.objects.order_by('-ratingAuthor').first()
+#
+# Проверяем как работает bestUser
+#
+bestUser
+#
+# Выводим username лучшего пользователя
+#
+bestUser.authorUser.username
+#
+# Выводим рейтинг лучшего пользователя
+#
+bestUser.ratingAuthor
+#
+#[ 10 ] Выведем дату добавления, username автора, рейтинг, заголовок и превью лучшей статьи, основываясь на лайках/дислайках к этой статье. title - заголовок, text - текст
+#
+Best_Post = Post.objects.order_by('-rating')[:1]
+# Выведем дату добавления
+Best_Post.values('dateCreation')
+# Выведем username автора
+Best_Post.values('author__authorUser__username')
+# Выведем рейтинг
+Post.objects.order_by('-rating')[0].rating
+# Выведем заголовок
+Best_Post.values('title')
+# Выведем превью лучшей статьи
+Post.objects.order_by('-rating')[0].preview()
+#
+#[ 11 ]Вывести все комментарии (дата, пользователь, рейтинг, текст) к этой статье.
+#
+Post.objects.order_by('-rating')[0].comment_set.all().values('dateCreation', 'commentUser__username', 'rating', 'text')
